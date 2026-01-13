@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block body %}
+<!-- <div class="box" style="background-color: #242424;width: 100%;height: 100px;">
+      <h2>{{nm}}</h2>
+</div> -->
+<div class="table-section d-flex justify-content-center align-items-center">
+  {% if allTodo|length==0 %}
+  <div class="alert alert-dark" role="alert">
+    No Todos found. Add your first todo..!!
+  </div>
+  {% else %}
+  <table class="table table-responsive-lg table-bordered table-hover-secondary"
+    style="background-color: #3B3B3B; color: white; margin-bottom: 50%;">
+    <thead>
+      <tr class="table-dark align-middle">
+        <th scope="col" style="width: 1%; white-space: nowrap;background-color: black;">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton"
+              data-toggle="dropdown">
+              Filters
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/table?sort=date">Sort by date</a>
+              <a class="dropdown-item" href="/table?sort=status">Sort by status</a>
+              <a class="dropdown-item" href="/table?sort=priority">Sort by priority</a>
+            </div>
+          </div>
+        </th>
+        <th colspan="5" class="text-center" style="color: white; background-color: black; font-size: 30px;">
+          {{ nm }}
+        </th>
+      </tr>
+      <tr>
+        <th scope="col">SrNo</th>
+        <th scope="col">Task Name</th>
+        <th scope="col">Status</th>
+        <th scope="col">Due date and time</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody style="background-color: #525252;">
+      {% for todo in allTodo %}
+      <tr {% if todo.date < now %} style="background-color:#543f3f;" {% endif %}>
+        <th scope="row">{{loop.index}}</th>
+        <td>{{todo.task}}</td>
+        <td>{% if todo.status == "In progress" %}
+          <span class="badge badge-primary">In progress</span>
+          {% elif todo.status == "Not started" %}
+          <span class="badge badge-secondary">Not started</span>
+          {% elif todo.status == "Done" %}
+          <span class="badge badge-success">Done</span>
+          {% endif %}
+        </td>
+        <td>{{ todo.date.strftime('%d %b %Y, %H:%M') }}
+          {% if todo.date.date() == now.date() %}
+          <span style="color:rgb(155, 119, 52); font-weight:bold;">(Due Today)</span>
+          {% endif %}
+        </td>
+        <td>{% if todo.priority == "Low" %}
+          <span class="badge badge-primary">Low</span>
+          {% elif todo.priority == "Medium" %}
+          <span class="badge badge-secondary">Medium</span>
+          {% elif todo.priority == "High" %}
+          <span class="badge badge-success">High</span>
+          {% endif %}
+        </td>
+        <td><a href="/update/{{todo.SrNo}}" type="button" id="update"
+            class="btn btn-outline-light btn-md mx-1">Update</a>
+          <button class="btn btn-outline-light btn-md mx-1" data-toggle="modal" data-target="#deleteModal"
+            data-id="{{ todo.SrNo }}">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Delete</h5>
+          <button type="button" class="close text-white" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          ⚠️ Are you sure you want to delete this task?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancel
+          </button>
+          <a id="confirmDeleteBtn" class="btn btn-danger">
+            OK, Delete
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endif %}
+</div>
+{% endblock %}

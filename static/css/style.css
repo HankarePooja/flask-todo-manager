@@ -1,0 +1,58 @@
+.custom-hero-section {
+    background-image: url("/static/img/dash.jpg");
+    min-height: 670px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.custom-hero-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.login-section {
+    background-image: url("/static/img/login_bg3.jpg");
+    min-height: 725px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.signup-link {
+    margin-left: 5px;
+    cursor: pointer;
+    color: #6c757d;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.signup-link:hover {
+    color: #007bff;
+}
+
+.task-section {
+    background-image: url("/static/img/add_task.jpg");
+    min-height: 725px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.table-section {
+    background-image: url("/static/img/add_task3.jpg");
+    min-height: 725px;
+    background-size: cover;
+    position: relative;
+}
+
+#flashMessage {
+    transition: opacity 0.5s ease;
+}

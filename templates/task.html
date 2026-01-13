@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="contain"
+    style="background-color: black;margin: 0px;padding-top: 150px;padding-bottom: 150px;padding-left: 350px;padding-right: 350px;">
+    <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>You have logged in successfully..!</strong> Add tasks.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div id="flashMessage" class="alert alert-success text-center">
+        {{ messages[0] }}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <div class="container">
+        <div class="box"
+            style="background-color: dimgrey;border-radius: 25px;height: 60px;width: 450px;margin-left: 140px;margin-bottom: 30px;">
+            <h2 style="color: white;margin-left: 13px;padding-top: 8px;">Welcome back to MyTodo....!!</h2>
+        </div>
+    </div>
+    <div class="container my-3">
+        <form action="/task" method="POST">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="nm" placeholder="Add Todo list name" aria-label="Username"
+                    aria-describedby="basic-addon1">
+            </div>
+            <div class="mb-3">
+                <label for="title" name="task" class="form-label" style="color: white;font-size: 18px;">Add Task</label>
+                <input type="text" class="form-control" name="task" id="title" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" name="status" style="color: white;font-size: 18px;">Add status</label>
+                <div class="input-group mb-3">
+                    <select class="custom-select" name="status" id="inputGroupSelect02">
+                        <option selected>Choose status...</option>
+                        <option value="In progress">In progress</option>
+                        <option value="Not started">Not started</option>
+                        <option value="Done">Done</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="meeting-time" name="date" style="color: white;font-size: 18px;">Add due date and
+                    time</label>
+                <!-- <input type="datetime-local" id="meeting-time" name="meeting-time" /> -->
+                <input type="datetime-local" class="form-control" name="date">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" name="priority"
+                    style="color: white;font-size: 18px;">Priority</label>
+                <div class="input-group mb-3">
+                    <select class="custom-select" name="priority" id="inputGroupSelect02">
+                        <option selected>Choose Priorities...</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" id="submit" class="btn btn-dark btn-lg" style="margin-top: 15px;">Submit</button>
+            <a href="/table" type="submit" class="btn btn-dark btn-lg" style="margin-top: 15px;margin-left: 10px;">View
+                tasks</a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
